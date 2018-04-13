@@ -1,0 +1,3 @@
+[submodule "AttnGAN"]
+	path = AttnGAN
+	url = https://github.com/gyxoned/AttnGAN.git
