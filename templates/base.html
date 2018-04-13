@@ -57,7 +57,7 @@
             <textarea rows="3" name="description" id="description" class="form-control" placeholder="请输入一句英文描述" required autofocus></textarea>
             <p></p>
             <p>
-              <input type="button" id="random" class="btn btn-primary my-2" value="随机生成" />
+              <input type="submit" id="random" class="btn btn-primary my-2" value="随机生成" />
               <input type="submit" id="submit" class="btn btn-secondary my-2" value="提交描述" />
             </p>
         </div>
@@ -67,34 +67,40 @@
         <div class="container">
 
           <div class="row">
-            <div class="col-md-2">
+            <div class="col-md-2 col-sm-4 col-xs-6">
               <div class="card mb-2 box-shadow">
-                <img class="card-img-top" style="height: 160px; width: 100%; display: block;" id="img0">
+                <img class="card-img-top" style="height: 100%; width: 100%; display: block;" 
+                      id="img0" src="/static/results/0.png">
               </div>
             </div>
-            <div class="col-md-2">
+            <div class="col-md-2 col-sm-4 col-xs-6">
               <div class="card mb-2 box-shadow">
-                <img class="card-img-top" style="height: 160px; width: 100%; display: block;" id="img1">
+                <img class="card-img-top" style="height: 100%; width: 100%; display: block;" 
+                      id="img1" src="/static/results/1.png">
               </div>
             </div>
-            <div class="col-md-2">
+            <div class="col-md-2 col-sm-4 col-xs-6">
               <div class="card mb-2 box-shadow">
-                <img class="card-img-top" style="height: 160px; width: 100%; display: block;" id="img2">
+                <img class="card-img-top" style="height: 100%; width: 100%; display: block;"
+                      id="img2" src="/static/results/2.png">
               </div>
             </div>
-            <div class="col-md-2">
+            <div class="col-md-2 col-sm-4 col-xs-6">
               <div class="card mb-2 box-shadow">
-                <img class="card-img-top" style="height: 160px; width: 100%; display: block;" id="img3">
+                <img class="card-img-top" style="height: 100%; width: 100%; display: block;" 
+                      id="img3" src="/static/results/3.png">
               </div>
             </div>
-            <div class="col-md-2">
+            <div class="col-md-2 col-sm-4 col-xs-6">
               <div class="card mb-2 box-shadow">
-                <img class="card-img-top" style="height: 160px; width: 100%; display: block;" id="img4">
+                <img class="card-img-top" style="height: 100%; width: 100%; display: block;" 
+                      id="img4" src="/static/results/4.png">
               </div>
             </div>
-            <div class="col-md-2">
-              <div class="card mb-2 box-shadow">
-                <img class="card-img-top" style="height: 160px; width: 100%; display: block;" id="img5">
+            <div class="col-md-2 col-sm-4 col-xs-6">
+              <div class="card box-shadow">
+                <img class="card-img-top" style="height: 100%; width: 100%; display: block;" 
+                      id="img5" src="/static/results/5.png">
               </div>
             </div>
           </div>
@@ -131,6 +137,15 @@
             $.each(ret, function(key, value){
               $("#"+key).attr("src",value)
             });
+          });
+        });
+      });
+    </script>
+    <script>
+      $(document).ready(function(){
+        $("#random").click(function(){
+          $.getJSON("{% url 'random_text' %}", function(ret) {
+            $("#description").val(ret.text);
           });
         });
       });
