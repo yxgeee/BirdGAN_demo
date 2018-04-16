@@ -1,6 +1,6 @@
 # Generate Bird Images by Text
-
-
+  
+  
 Web demo for generating bird images by description. 
 The web framework is built up on Django, and the generation function of backend system is written by pytorch. (costs about 900M GPU memory)  
 Thanks for [AttnGAN](https://github.com/taoxugit/AttnGAN).
@@ -16,6 +16,6 @@ Thanks for [AttnGAN](https://github.com/taoxugit/AttnGAN).
 described in AttnGAN/README.md
 
 ### Run the server
-``python manage.py runserver 0.0.0.0:8000``,
-and then visit your web by ``http://localhost:8000/``,
-you can change 8000 to any other port as you want.
+run ``python manage.py runserver 0.0.0.0:8000`` in the root directory, 
+and then visit your web by ``http://localhost:8000/``, 
+also you can change 8000 to any other port as you want.
