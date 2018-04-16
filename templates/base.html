@@ -55,6 +55,7 @@
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
 }
+.nowrap{white-space:nowrap;}   
 </style>
 </head>
 <!-- <link type="text/css" rel="stylesheet" href="chrome-extension://pioclpoplcdbaefihamjohnefbikjilc/content.css"></head> -->
@@ -73,14 +74,14 @@
     <main role="main">
       <section class="jumbotron text-center">
         <div class="container">
-          <h1 class="jumbotron-heading">根据描述生成鸟类图片</h1>
+          <h1 class="jumbotron-heading text-center">根据描述生成鸟类图片</h1>
           <p></p>
           <textarea rows="3" name="description" id="description" class="form-control" placeholder="请输入一句英文描述" required autofocus></textarea>
           <p></p>
-          <p>
-            <input type="button" id="random" class="btn btn-primary my-2" value="随机生成" />
+          <p style="position:relative;">
+            <input type="button" id="random" class="btn btn-primary" value="随机生成" />
             <input type="button" id="submit" class="btn btn-secondary my-2 ml-3" value="提交描述" />
-            <span id='loading' class="loader align-middle" style="display: none;"></span>
+            <span id='loading' class="loader align-middle ml-1" style="visibility:hidden; position:absolute; top:10px"></span>
           </p>
         </div>
       </section>
@@ -177,7 +178,8 @@
               url: 'describe_text/',
               data: {"description":description},
               beforeSend: function(){ 
-                $("#loading").show();
+                // $("#loading").show();
+                $('#loading').css('visibility','visible'); 
                 $("#submit").attr({ disabled: "disabled" });
               },
               success: function (ret) {
@@ -187,7 +189,8 @@
                 });
               },
               complete: function () {
-                $("#loading").hide();
+                // $("#loading").hide();
+                $('#loading').css('visibility','hidden'); 
                 $("#submit").removeAttr("disabled");
               },
               error: function(ret) {
@@ -201,4 +204,4 @@
     </script>
   
 
-<svg xmlns="http://www.w3.org/2000/svg" width="508" height="225" viewBox="0 0 508 225" preserveAspectRatio="none" style="display: none; visibility: hidden; position: absolute; top: -100%; left: -100%;"><defs><style type="text/css"></style></defs><text x="0" y="25" style="font-weight:bold;font-size:25pt;font-family:Arial, Helvetica, Open Sans, sans-serif">Thumbnail</text></svg></body></html>
+<!-- <svg xmlns="http://www.w3.org/2000/svg" width="508" height="225" viewBox="0 0 508 225" preserveAspectRatio="none" style="display: none; visibility: hidden; position: absolute; top: -100%; left: -100%;"><defs><style type="text/css"></style></defs><text x="0" y="25" style="font-weight:bold;font-size:25pt;font-family:Arial, Helvetica, Open Sans, sans-serif">Thumbnail</text></svg></body></html> -->
