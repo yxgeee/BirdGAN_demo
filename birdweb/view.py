@@ -24,7 +24,7 @@ def describe_text(request):
 	text = request.POST['description']
 	return_code = gan(text)
 	if return_code==0:
-		response = JsonResponse({"error": "输入不能为空"})
+		response = JsonResponse({"error": "The description cannot be empty."})
 		response.status_code = 403 # To announce that the user isn't allowed to publish
 		return response
 

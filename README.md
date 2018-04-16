@@ -10,3 +10,4 @@ Django 1.11
 ### Download required packages and pretrained models
 described in AttnGAN/README.md
 
+![screenshot](https://github.com/gyxoned/bird_demo/tree/master/static/img/screen.png)
