@@ -13,17 +13,8 @@
 
     <!-- Custom styles for this template -->
     <link href="/static/css/album.css" rel="stylesheet">
-    <style>[touch-action="none"]{ -ms-touch-action: none; touch-action: none; touch-action-delay: none; }
-    body /shadow-deep/ [touch-action="none"]{ -ms-touch-action: none; touch-action: none; touch-action-delay: none; }
-    [touch-action="auto"]{ -ms-touch-action: auto; touch-action: auto; touch-action-delay: none; }
-    body /shadow-deep/ [touch-action="auto"]{ -ms-touch-action: auto; touch-action: auto; touch-action-delay: none; }
-    [touch-action="pan-x"]{ -ms-touch-action: pan-x; touch-action: pan-x; touch-action-delay: none; }
-    body /shadow-deep/ [touch-action="pan-x"]{ -ms-touch-action: pan-x; touch-action: pan-x; touch-action-delay: none; }
-    [touch-action="pan-y"]{ -ms-touch-action: pan-y; touch-action: pan-y; touch-action-delay: none; }
-    body /shadow-deep/ [touch-action="pan-y"]{ -ms-touch-action: pan-y; touch-action: pan-y; touch-action-delay: none; }
-    [touch-action="pan-x pan-y"],[touch-action="pan-y pan-x"]{ -ms-touch-action: pan-x pan-y; touch-action: pan-x pan-y; touch-action-delay: none; }
-    body /shadow-deep/ [touch-action="pan-x pan-y"],body /shadow-deep/ [touch-action="pan-y pan-x"]{ -ms-touch-action: pan-x pan-y; touch-action: pan-x pan-y; touch-action-delay: none; }
-    </style><style id="style-1-cropbar-clipper">/* Copyright 2014 Evernote Corporation. All rights reserved. */
+    
+    <!-- <style id="style-1-cropbar-clipper">/* Copyright 2014 Evernote Corporation. All rights reserved. */
     .en-markup-crop-options {
         top: 18px !important;
         left: 50% !important;
@@ -36,7 +27,37 @@
 .en-markup-crop-options div div:first-of-type {
     margin-left: 0px !important;
 }
-</style><link type="text/css" rel="stylesheet" href="chrome-extension://pioclpoplcdbaefihamjohnefbikjilc/content.css"></head>
+</style> -->
+<head>
+  <style>[touch-action="none"]{ -ms-touch-action: none; touch-action: none; touch-action-delay: none; }
+    body /shadow-deep/ [touch-action="none"]{ -ms-touch-action: none; touch-action: none; touch-action-delay: none; }
+    [touch-action="auto"]{ -ms-touch-action: auto; touch-action: auto; touch-action-delay: none; }
+    body /shadow-deep/ [touch-action="auto"]{ -ms-touch-action: auto; touch-action: auto; touch-action-delay: none; }
+    [touch-action="pan-x"]{ -ms-touch-action: pan-x; touch-action: pan-x; touch-action-delay: none; }
+    body /shadow-deep/ [touch-action="pan-x"]{ -ms-touch-action: pan-x; touch-action: pan-x; touch-action-delay: none; }
+    [touch-action="pan-y"]{ -ms-touch-action: pan-y; touch-action: pan-y; touch-action-delay: none; }
+    body /shadow-deep/ [touch-action="pan-y"]{ -ms-touch-action: pan-y; touch-action: pan-y; touch-action-delay: none; }
+    [touch-action="pan-x pan-y"],[touch-action="pan-y pan-x"]{ -ms-touch-action: pan-x pan-y; touch-action: pan-x pan-y; touch-action-delay: none; }
+    body /shadow-deep/ [touch-action="pan-x pan-y"],body /shadow-deep/ [touch-action="pan-y pan-x"]{ -ms-touch-action: pan-x pan-y; touch-action: pan-x pan-y; touch-action-delay: none; }
+    </style>
+<style>
+.loader {
+    border: 8px solid #f3f3f3; /* Light grey */
+    border-top: 8px solid #3498db; /* Blue */
+    border-radius: 50%;
+    width: 35px;
+    height: 35px;
+    animation: spin 2s linear infinite;
+    display: inline-block;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+</style>
+</head>
+<!-- <link type="text/css" rel="stylesheet" href="chrome-extension://pioclpoplcdbaefihamjohnefbikjilc/content.css"></head> -->
   <body style="">
 
     <header>
@@ -53,53 +74,54 @@
       <section class="jumbotron text-center">
         <div class="container">
           <h1 class="jumbotron-heading">根据描述生成鸟类图片</h1>
-            <p></p>
-            <textarea rows="3" name="description" id="description" class="form-control" placeholder="请输入一句英文描述" required autofocus></textarea>
-            <p></p>
-            <p>
-              <input type="submit" id="random" class="btn btn-primary my-2" value="随机生成" />
-              <input type="submit" id="submit" class="btn btn-secondary my-2" value="提交描述" />
-            </p>
+          <p></p>
+          <textarea rows="3" name="description" id="description" class="form-control" placeholder="请输入一句英文描述" required autofocus></textarea>
+          <p></p>
+          <p>
+            <input type="button" id="random" class="btn btn-primary my-2" value="随机生成" />
+            <input type="button" id="submit" class="btn btn-secondary my-2 ml-3" value="提交描述" />
+            <span id='loading' class="loader align-middle" style="display: none;"></span>
+          </p>
         </div>
       </section>
 
       <div class="album py-5 bg-light">
         <div class="container">
 
-          <div class="row">
-            <div class="col-md-2 col-sm-4 col-xs-6">
-              <div class="card mb-2 box-shadow">
+          <div class="row top-buffer">
+            <div class="col-md-2 col-sm-4 col-6">
+              <div class="card mb-2 mt-2 box-shadow">
                 <img class="card-img-top" style="height: 100%; width: 100%; display: block;" 
                       id="img0" src="/static/results/0.png">
               </div>
             </div>
-            <div class="col-md-2 col-sm-4 col-xs-6">
-              <div class="card mb-2 box-shadow">
+            <div class="col-md-2 col-sm-4 col-6">
+              <div class="card mb-2 mt-2 box-shadow">
                 <img class="card-img-top" style="height: 100%; width: 100%; display: block;" 
                       id="img1" src="/static/results/1.png">
               </div>
             </div>
-            <div class="col-md-2 col-sm-4 col-xs-6">
-              <div class="card mb-2 box-shadow">
+            <div class="col-md-2 col-sm-4 col-6">
+              <div class="card mb-2 mt-2 box-shadow">
                 <img class="card-img-top" style="height: 100%; width: 100%; display: block;"
                       id="img2" src="/static/results/2.png">
               </div>
             </div>
-            <div class="col-md-2 col-sm-4 col-xs-6">
-              <div class="card mb-2 box-shadow">
+            <div class="col-md-2 col-sm-4 col-6">
+              <div class="card mb-2 mt-2 box-shadow">
                 <img class="card-img-top" style="height: 100%; width: 100%; display: block;" 
                       id="img3" src="/static/results/3.png">
               </div>
             </div>
-            <div class="col-md-2 col-sm-4 col-xs-6">
-              <div class="card mb-2 box-shadow">
-                <img class="card-img-top" style="height: 100%; width: 100%; display: block;" 
+            <div class="col-md-2 col-sm-4 col-6">
+              <div class="card mb-2 mt-2 box-shadow">
+                <img class="card-img-top" style="height: 100%; width: 100%; display: block;"
                       id="img4" src="/static/results/4.png">
               </div>
             </div>
-            <div class="col-md-2 col-sm-4 col-xs-6">
-              <div class="card box-shadow">
-                <img class="card-img-top" style="height: 100%; width: 100%; display: block;" 
+            <div class="col-md-2 col-sm-4 col-6">
+              <div class="card mb-2 mt-2 box-shadow">
+                <img class="card-img-top" style="height: 100%; width: 100%; display: block;"
                       id="img5" src="/static/results/5.png">
               </div>
             </div>
@@ -131,21 +153,48 @@
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.2.6/jquery.min.js" type="text/javascript"></script>
     <script>
       $(document).ready(function(){
-        $("#submit").click(function(){
+        $("#random").click(function(){
           var description = $("#description").val();
-          $.getJSON("{% url 'describe_text' %}", {"description":description}, function(ret) {
-            $.each(ret, function(key, value){
-              $("#"+key).attr("src",value)
-            });
+          $.ajax({
+              type: 'POST',
+              url: 'random_text/',
+              data: {"description":description},
+              success: function (ret) {
+                var retJson = JSON.parse(ret);
+                $("#description").val(retJson.text);
+              },
+              error: function(ret) {
+                
+              }
           });
         });
       });
-    </script>
-    <script>
       $(document).ready(function(){
-        $("#random").click(function(){
-          $.getJSON("{% url 'random_text' %}", function(ret) {
-            $("#description").val(ret.text);
+        $("#submit").click(function(){
+          var description = $("#description").val();
+          $.ajax({
+              type: 'POST',
+              url: 'describe_text/',
+              data: {"description":description},
+              beforeSend: function(){ 
+                $("#loading").show();
+                $("#submit").attr({ disabled: "disabled" });
+              },
+              success: function (ret) {
+                var retJson = JSON.parse(ret);
+                $.each(retJson, function(key, value){
+                  $("#"+key).attr("src",value+'?'+new Date().getTime())
+                });
+              },
+              complete: function () {
+                $("#loading").hide();
+                $("#submit").removeAttr("disabled");
+              },
+              error: function(ret) {
+                  console.log(ret)
+                  var retJson = JSON.parse(ret.responseText);
+                  alert(retJson.error);
+              }
           });
         });
       });
